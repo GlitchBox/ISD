@@ -39,6 +39,7 @@ class SMRest{
       print("Hello Vietnam");
 
         smList= new SMList.fromJson(res);
+        smList.setTopicId(topicId);
 
       //final Map<String, Map<String,dynamic> >tempRes=res;
       /*
@@ -57,7 +58,11 @@ class SMRest{
       }
       */ 
         
-
+    //   for (int ind = 0; ind < smList.sms.length; ind++) {
+    //   print(smList.sms.elementAt(ind).banglaSentence +
+    //       " " +
+    //       smList.sms.elementAt(ind).englishSentence);
+    // }
       return smList;
     });
 

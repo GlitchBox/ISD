@@ -141,7 +141,7 @@ class MainDatabaseHelper {
     //SM Table
     await db.execute(
         "CREATE TABLE $smTable($smIdCol INTEGER PRIMARY KEY AUTOINCREMENT, "
-        "$smQuestionCol TEXT,$smEnglishSentenceCol TEXT,$smBanglaSentenceCol TEXT,$smTopicIdCol INTEGER, FOREIGN KEY($smTopicIdCol) REFERENCES $topicTable($topicIdCol))");
+        "$smEnglishSentenceCol TEXT,$smBanglaSentenceCol TEXT,$smTopicIdCol INTEGER, FOREIGN KEY($smTopicIdCol) REFERENCES $topicTable($topicIdCol))");
     print("Created SM tables");
 
     //TF Table

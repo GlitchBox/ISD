@@ -88,10 +88,10 @@ class _OptionViewState extends State<OptionView> {
               widget._text += (" " + dragged._text);
               buttonColor = Colors.green;
               dragged.isDisabled = true;
-              widget.notification(true);
+              widget.notification(true, model);
             } else {
               buttonColor = Colors.red;
-              widget.notification(false);
+              widget.notification(false, model);
             }
           });
           Timer(Duration(milliseconds: 700), () {

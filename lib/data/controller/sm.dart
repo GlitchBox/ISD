@@ -30,11 +30,13 @@ class SMController{
         await _insertSMList(smList);
     }
     List<SM>result = await smDatabaseHelper.getSMList(topicId);
+    print("In getSMList: "+result.length.toString());
     return result;
   }
 
   Future<void>_insertSMList(SMList smList)async{
     List<SM>sList=smList.sms;
+    print("In _insertSMList: "+sList.length.toString());
     
     for(int i=0;i<sList.length;i++)
     {

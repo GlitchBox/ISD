@@ -368,9 +368,11 @@ class _SMState extends State<SentenceMatchingView>
         int jsonSetArrived = qsList.length ~/ 3;
         print("json set no: "+jsonSetArrived.toString());
         
+
+        model.smQuestionList = new List<Map<String,String>>();
         for (int i = 0; i < jsonSetArrived; i++) {
           // _options[i] = new Map<String, String>();
-          model.smQuestionList[i] = new Map<String, String>();
+          model.smQuestionList.add(new Map<String, String>()); 
         }
 
         int jsonNo = 0, index;
