@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class SMModel extends Model {
   bool _smIsLoaded = false;
   bool _smIsPressed = false;
-  int _smTotalTasks = 5;
-  int _smCurrentTask = 1;
+  int _smTotalTasks = 0;
+  int _smCurrentTask = 0;
   int _smSolved;
   int _smTotalQuestions;
   String _smButtonText = "Get Next";

@@ -5,7 +5,6 @@ class SMList {
 
   factory SMList.fromJson(List<dynamic> parsedJson) {
     List<SM> sms = new List<SM>();
-    print("parsedJson len: " + parsedJson.length.toString());
     sms = parsedJson.map((i) => SM.fromJson(i)).toList();
 
     // for (int ind = 0; ind < sms.length; ind++) {

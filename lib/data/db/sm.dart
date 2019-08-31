@@ -30,7 +30,6 @@ class SMDatabaseHelper{
     Database dbClient = await _databaseHelper.db;
 
     List<Map<String,dynamic> > result = await dbClient.query(tableName,where:'$topicIdCol = ?',whereArgs: [topicId]);
-    print("in getSMList/db: (topic="+topicId.toString()+") "+result.length.toString());
     List<SM> tList= new List<SM>();
     for(int i=0;i<result.length;i++)
     {
@@ -44,7 +43,6 @@ class SMDatabaseHelper{
 
   // Insert Operation: Insert a Topic object to database
   Future<int> insertSM(SM sm) async {
-    print("In insertSM "+sm.topicId.toString());
     var dbClient = await _databaseHelper.db;
     var result = await dbClient.insert(tableName, sm.toMap());
     return result;

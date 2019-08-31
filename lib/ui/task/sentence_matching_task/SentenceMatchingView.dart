@@ -366,7 +366,8 @@ class _SMState extends State<SentenceMatchingView>
             from: timeController.value == 0 ? 1 : timeController.value);
 
         int jsonSetArrived = qsList.length ~/ 3;
-        print("json set no: "+jsonSetArrived.toString());
+        model.smTotalTasks = jsonSetArrived;
+        model.smCurrentTask =1;
         
 
         model.smQuestionList = new List<Map<String,String>>();
