@@ -1,7 +1,7 @@
 import 'package:Dimik/data/controller/sme.dart';
 import 'package:Dimik/models/sme.dart';
+import 'package:Dimik/models/token.dart';
 import 'package:Dimik/ui/task/sentence_matching_task_eng/OptionCard.dart';
-import 'package:Dimik/ui/task/sentence_matching_task_eng/SentenceMatchingController.dart';
 import 'package:flutter/material.dart';
 import './OptionView.dart';
 import '../../../view/widgets/topScreen.dart';
@@ -410,7 +410,7 @@ class _SMState extends State<SentenceMatchingViewEng>
 
   void getQuestions(MainModel model) async {
     smc = new SMEController();
-    smc.getSMList(TOKEN, "1").then((qsList) {
+    smc.getSMList(model.user.token, model.currentTopic.id).then((qsList) {
       setState(() {
         model.smEIsLoaded = true;
         timeController.reverse(
@@ -419,11 +419,13 @@ class _SMState extends State<SentenceMatchingViewEng>
         int jsonSetArrived = qsList.length ~/ 3;
         print("jsonArrived: " + jsonSetArrived.toString());
 
-        List<Map<String,String>> sme=new List<Map<String,String>>();
+        model.smECurrentTask = 1;
+        model.smETotalTasks = jsonSetArrived;
+
+        model.smEQuestionList=new List<Map<String,String>>();
         for (int i = 0; i < jsonSetArrived; i++) {
-          // _options[i] = new Map<String, String>();
-         // model.smEQuestionList[i] = new Map<String, String>();
-         //sme[i]=new Map<String, String>();
+          
+         model.smEQuestionList[i] = new Map<String, String>();
         }
         //model.smEQuestionList=sme;
 

@@ -165,7 +165,7 @@ class MainDatabaseHelper {
     //SME Table
     await db.execute(
     "CREATE TABLE $smeTable($smeIdCol INTEGER PRIMARY KEY AUTOINCREMENT, "
-    "$smeBrokenSentenceCol TEXT,$smeEnglishSentenceCol TEXT,$smeBanglaSentenceCol TEXT,$smeFirstSegmentCol TEXT,$smeLastSegmentCol TEXT,$smeTopicIdCol TEXT,FOREIGN KEY($smeTopicIdCol) REFERENCES $topicTable($topicIdCol))");
+    "$smeBrokenSentenceCol TEXT,$smeEnglishSentenceCol TEXT,$smeBanglaSentenceCol TEXT,$smeFirstSegmentCol TEXT,$smeLastSegmentCol TEXT,$smeTopicIdCol INTEGER,FOREIGN KEY($smeTopicIdCol) REFERENCES $topicTable($topicIdCol))");
     print("Created sme table");
 
     //JUMBLED Table

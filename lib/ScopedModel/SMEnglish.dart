@@ -3,8 +3,8 @@ import 'package:scoped_model/scoped_model.dart';
 class SMEnglish extends Model{
   bool _smEIsLoaded = false;
   bool _smEIsPressed = false;
-  int _smETotalTasks = 5;
-  int _smECurrentTask = 1;
+  int _smETotalTasks = 0;
+  int _smECurrentTask = 0;
   int _smESolved;
   int _smETotalQuestions;
   String _smEButtonText = "Get Next";

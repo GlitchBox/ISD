@@ -19,7 +19,7 @@ class SMEController{
   SMERest smRest=new SMERest();
   SMEDatabaseHelper smDatabaseHelper=new SMEDatabaseHelper();
   
-  Future<List<SME> >getSMList(String token,String topicID)async{
+  Future<List<SME> >getSMList(String token,int topicID)async{
     int count=await smDatabaseHelper.getCount();
     if(count==0)//table is empty
     {

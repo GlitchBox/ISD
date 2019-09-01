@@ -15,7 +15,7 @@ class SMERest{
   SMEList smList ;
   NetworkUtil _netUtil = new NetworkUtil();
 
-  Future <SMEList> getAllSM(String token,String topicID)
+  Future <SMEList> getAllSM(String token,int topicID)
   { 
     
     String t1="application/x-www-form-urlencoded";
@@ -29,7 +29,7 @@ class SMERest{
     headers["topic_id"]=topicId.toString();
     headers["task_id"]=taskId.toString();
     */
-    headers["topic_id"]=topicID;
+    headers["topic_id"]=topicID.toString();
     print(topicID);
     return _netUtil.get(SME_URL,headers:headers).then((dynamic res){
       print("DEBUG :=====================\n"+
@@ -39,6 +39,7 @@ class SMERest{
       print("Hello Vietnam");
 
         smList= new SMEList.fromJson(res);
+        smList.setTopicId(topicID);
 
       //final Map<String, Map<String,dynamic> >tempRes=res;
       /*
