@@ -425,9 +425,9 @@ class _SMState extends State<SentenceMatchingViewEng>
         model.smEQuestionList=new List<Map<String,String>>();
         for (int i = 0; i < jsonSetArrived; i++) {
           
-         model.smEQuestionList[i] = new Map<String, String>();
+          model.smEQuestionList.add(new Map<String, String>());
         }
-        //model.smEQuestionList=sme;
+        
 
         int jsonNo = 0, index;
         qsList.forEach((qs) {
