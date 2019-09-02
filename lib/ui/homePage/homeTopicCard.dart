@@ -75,6 +75,14 @@ class _TopicCardState extends State<TopicCard> {
                 model.currentTopic = widget.mainTopic;
                 Navigator.pushNamed(context, '/jumbled');
                 break;
+              case 'Fill in The Gaps':
+                model.currentTopic = widget.mainTopic;
+                Navigator.pushNamed(context, '/fillTheGaps');
+                break;
+              case 'Multiple Choice Question':
+                model.currentTopic = widget.mainTopic;
+                Navigator.pushNamed(context, '/mcqTask');
+                break;
 
               default:
             }

@@ -1,3 +1,4 @@
+import 'package:Dimik/ScopedModel/mergedmodel.dart';
 import 'package:Dimik/ui/task/TrueFalse/true_false_task.dart';
 import 'package:Dimik/ui/homePage/home.dart';
 import 'package:Dimik/ui/gameover/gameover_view.dart';
@@ -14,6 +15,9 @@ import 'package:Dimik/ui/task/sentence_matching_task/SentenceMatchingView.dart';
 import 'package:Dimik/ui/task/sentence_matching_task_eng/SentenceMatchingView.dart';
 import 'package:Dimik/ui/task/jumble_Sentence/jumble_Sentence_view.dart';
 import 'package:flutter/material.dart';
+import 'package:Dimik/ui/task/Fill_in_the_gaps/Fill_in_the_gaps_view.dart';
+import 'package:Dimik/ui/task/mcq_task/mcq_task_view.dart';
+
 
 final routes = {
   '/gameover': (BuildContext context) => new GameOver(),
@@ -31,5 +35,7 @@ final routes = {
   '/sm' : (BuildContext context) => new SentenceMatchingView(),
   '/sme' : (BuildContext context) => new SentenceMatchingViewEng(),
   '/jumbled': (BuildContext context) => new jumbleSentenceView(),
+  '/fillTheGaps': (BuildContext context) => new FillTheGapsView(),
+  "/mcqTask": (BuildContext context) => new MCQView(),
 
 };

@@ -15,7 +15,7 @@ class MCQRest{
 
   NetworkUtil _netUtil = new NetworkUtil();
 
-  Future<MCQList>getAllMCQ(String token, int user_id,int topic_id)
+  Future<MCQList>getAllMCQ(String token, /*int user_id,*/int topic_id)
   { 
 
     String t1="application/x-www-form-urlencoded";
@@ -25,8 +25,8 @@ class MCQRest{
     headers["Accept"]=t2;
     headers["Authorization"]=token;
     headers["topic_id"]=topic_id.toString();
-    headers["user_id"]=user_id.toString();
-    //String mcq_url=MCQ_URL+'/'+topic_id.toString();
+    //headers["user_id"]=user_id.toString();
+
     return _netUtil.get(MCQ_URL,headers: headers).then((dynamic res){
       
       //print("DEBUG :=====================\n"+
@@ -40,7 +40,7 @@ class MCQRest{
       print("Hello WOrld\n");
 
       mcqList = new MCQList.fromJson(res); 
-
+      mcqList.setTopicId(topic_id);
       print("KekekeR\n");
 
       //List<MCQ> tempG=mcqList.MCQs;

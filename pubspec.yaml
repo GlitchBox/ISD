@@ -18,9 +18,9 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  pimp_my_button:
-    git:
-      url: git://github.com/Norbert515/pimp_my_button.git
+  # pimp_my_button:
+  #   git:
+  #     url: git://github.com/Norbert515/pimp_my_button.git
   sqflite: ^1.1.0
   flutter_circular_chart: ^0.1.0
   audioplayers: ^0.13.0

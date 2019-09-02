@@ -22,13 +22,14 @@ class MCQDatabaseHelper{
   String optionCol='Options';
   String answerCol='Answer';
   String explanationCol='Explanation';
+  String topicIdCol='Topic_Id';
 
   
 
-  Future<List<MCQ> > getMCQList() async {
+  Future<List<MCQ> > getMCQList(int topicId) async {
     Database dbClient = await _databaseHelper.db;
 
-    List<Map<String,dynamic> > result = await dbClient.rawQuery('SELECT * FROM $tableName');
+    List<Map<String,dynamic> > result = await dbClient.query(tableName,where:'$topicIdCol = ?',whereArgs: [topicId]);
     List<MCQ> mList= new List<MCQ>();
     for(int i=0;i<result.length;i++)
     {
@@ -60,7 +61,11 @@ class MCQDatabaseHelper{
     int result = await dbClient.rawDelete('DELETE FROM $tableName WHERE $idCol = $entryId');
     return result;
   }
-
+  //  Future<int> deleteMCQ() async {
+  //   var dbClient = await _databaseHelper.db;
+  //   int result = await dbClient.delete(tableName);
+  //   return result;
+  // }
 
   Future<int> getCount() async {
     var dbClient = await _databaseHelper.db;

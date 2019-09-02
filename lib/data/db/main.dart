@@ -37,6 +37,7 @@ class MainDatabaseHelper {
   String mcqOptionCol = 'Options';
   String mcqAnswerCol = 'Answer';
   String mcqExplanationCol = 'Explanation';
+  String mcqTopicIdCol='Topic_Id';
 
   //for FB
   String fbTable = 'FB';
@@ -45,6 +46,7 @@ class MainDatabaseHelper {
   String fbOptionsCol = 'Options';
   String fbAnswersCol = 'Answers';
   String fbExplanationCol = 'Explanation';
+  String fbTopicIdCol='Topic_Id';
 
   //for SM
   String smTable = 'SM';
@@ -131,12 +133,12 @@ class MainDatabaseHelper {
     //MCQ Table
     await db.execute(
         "CREATE TABLE $mcqTable($mcqIdCol INTEGER PRIMARY KEY AUTOINCREMENT, "
-        "$mcqQuestionCol TEXT,$mcqOptionCol TEXT,$mcqAnswerCol TEXT,$mcqExplanationCol TEXT)");
+        "$mcqQuestionCol TEXT,$mcqOptionCol TEXT,$mcqAnswerCol TEXT,$mcqExplanationCol TEXT,$mcqTopicIdCol INTEGER,FOREIGN KEY($mcqTopicIdCol) REFERENCES $topicTable($topicIdCol))");
 
     //FB Table
     await db.execute(
         "CREATE TABLE $fbTable($fbIdCol INTEGER PRIMARY KEY AUTOINCREMENT, "
-        "$fbQuestionCol TEXT,$fbOptionsCol TEXT,$fbAnswersCol TEXT,$fbExplanationCol TEXT)");
+        "$fbQuestionCol TEXT,$fbOptionsCol TEXT,$fbAnswersCol TEXT,$fbExplanationCol TEXT,$fbTopicIdCol INTEGER,FOREIGN KEY($fbTopicIdCol) REFERENCES $topicTable($topicIdCol))");
 
     //SM Table
     await db.execute(

@@ -16,7 +16,9 @@ class MainModel extends Model
         QuizModel,
         SMModel,
         SMEnglish,
-        JumbledModel {
+        JumbledModel,
+        FillInTheGaps,
+        MCQScoped {
   MainModel() {
     generateTasks();
   }

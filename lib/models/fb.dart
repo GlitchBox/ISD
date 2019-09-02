@@ -14,6 +14,12 @@ class FBList {
     );
   }
 
+  void setTopicId(int topicId) {
+    for (int i = 0; i < fbs.length; i++) {
+      fbs[i].topicId = topicId;
+    }
+  }
+
   List<FB>get fbs =>_fbs;
 }
 
@@ -25,6 +31,7 @@ class FB{
   List<String> _options;
   List<String> _answers;
   String _explanation;
+  int _topicId;
 
   FB._({int id,String question, List<String>options,List<String>answers,String explanation}):
   _id=id,
@@ -62,6 +69,8 @@ class FB{
   List<String> get answers => _answers;
 
   String get explanation => _explanation;
+
+  int get topicId => _topicId;
   //setter
   set id(int fbId){
     this._id=fbId;
@@ -82,6 +91,10 @@ class FB{
   set explanation(String explanation)
   {
     this._explanation=explanation;
+  }
+
+  set topicId(int t){
+    this._topicId=t;
   }
 
   String _concatenateListElements(List<String>list)
@@ -111,6 +124,7 @@ class FB{
     map['Answers'] = _concatenateListElements(answers);
     //map['AnswerCount'] = answerCount;
     map['Explanation'] = explanation;
+    map['Topic_Id']=_topicId;
     
     return map;
   }
@@ -122,6 +136,7 @@ class FB{
     this._options= map['Options'].split('#');
     this._answers = map['Answers'].split('#');
     this._explanation = map['Explanation'];
+    this._topicId = map['Topic_Id'];
   }
 
   String toString()

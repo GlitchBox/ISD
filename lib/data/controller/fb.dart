@@ -28,7 +28,7 @@ class FBController{
         });
         await _insertFBList(fbList);
     }
-    List<FB>result = await fbDatabaseHelper.getFBList();
+    List<FB>result = await fbDatabaseHelper.getFBList(topicId);
     return result;
   }
 

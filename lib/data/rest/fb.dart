@@ -36,7 +36,7 @@ class FBRest{
       print("Hello Vietnam");
 
         fbList= new FBList.fromJson(res);
-
+        fbList.setTopicId(topicId);
       //final Map<String, Map<String,dynamic> >tempRes=res;
       /*
       res.forEach((String key, Map<String,dynamic>topicData){

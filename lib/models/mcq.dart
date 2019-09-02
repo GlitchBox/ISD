@@ -1,3 +1,5 @@
+import 'package:Dimik/models/mixTask.dart';
+
 class MCQList {
   List<MCQ> _mcqs;
 
@@ -14,12 +16,18 @@ class MCQList {
     );
   }
 
+  void setTopicId(int topicId) {
+    for (int i = 0; i < mcqs.length; i++) {
+      mcqs[i].topicId = topicId;
+    }
+  }
+
   List<MCQ>get mcqs =>_mcqs;
 }
 
 
 
-class MCQ{
+class MCQ extends MixTask{
 
   //final int _mcqId;
   int _id;
@@ -27,10 +35,11 @@ class MCQ{
   List<String> _options;
   String _answer;
   String _explanation;
-
+  int _topicId;
   
 
-  MCQ._({int id,String question,List<String> options,String answer,String explanation}):
+  MCQ.mixTask({int id,String question,List<String> options,String answer,String explanation}):
+  //MCQ._({int id,String question,List<String> options,String answer,String explanation}):
       _id=id,
       _question=question,
       _options=options,
@@ -43,7 +52,8 @@ class MCQ{
     List<String>optionList= new List<String>.from(temp);
     //for(int i=0;i<optionList.length;i++)
       //print(optionList[i]);
-    return new MCQ._(
+    return new MCQ.mixTask(
+    //return new MCQ._(
       //id: json["Id"],
       question: json["Question"],
       options: optionList,
@@ -65,6 +75,8 @@ class MCQ{
   String get answer => _answer;
 
   String get explanation => _explanation;
+
+  int get topicId => _topicId;
   //setters
   set id(int mcqId) {
     
@@ -88,6 +100,10 @@ class MCQ{
     
       this._answer = mcqAnswer;
     
+  }
+
+  set topicId(int t) {
+    this._topicId = t;
   }
 
   String _concatenateListElements(List<String>list)
@@ -116,6 +132,7 @@ class MCQ{
     map['Options'] = _concatenateListElements(options);
     map['Answer'] = _answer;
     map['Explanation'] = _explanation;
+    map['Topic_Id'] = _topicId;
     
     return map;
   }
@@ -126,6 +143,7 @@ class MCQ{
     this._options= map['Options'].split('#');
     this._answer = map['Answer'];
     this._explanation= map['Explanation'];
+    this._topicId = map['Topic_Id'];
   }
   
   String toString(){

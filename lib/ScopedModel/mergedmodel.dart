@@ -15,6 +15,9 @@ import 'package:Dimik/models/task.dart';
 import 'package:Dimik/models/topic.dart';
 import 'package:Dimik/databaseChange/jumbleSentence.dart';
 import 'package:Dimik/models/jumbled_sentence.dart';
+import 'package:Dimik/databaseChange/FBGapData.dart';
+import 'package:Dimik/models/fb.dart';
+import 'package:Dimik/databaseChange/mcqData.dart';
 
 class MergedModel extends Model {
   final List<Topic> topics = [];
@@ -84,7 +87,7 @@ class MergedModel extends Model {
     if (!_generated) {
       TopicController tController = new TopicController();
       List<Topic> list = await tController.getTopicList(user.token);
-      for (int i = 0; i < 3; i++) {
+      for (int i = 0; i < 5; i++) {
         topics.add(list[i]);
       }
       /*
@@ -176,10 +179,14 @@ class MergedModel extends Model {
     Task t1 = Task(name: 'Sentence Matching');
     Task t2 = Task(name: 'Sentence Matching English');
     Task t3 = Task(name: 'Jumbled Sentence');
+    Task t4 = Task(name: 'Fill in The Gaps');
+    Task t5 = Task(name: 'Multiple Choice Question'); 
 
     tasks.add(t1);
     tasks.add(t2);
     tasks.add(t3);
+    tasks.add(t4);
+    tasks.add(t5);
     // tasks.add(t4);
     // tasks.add(t5);
     // tasks.add(t6);
@@ -526,3 +533,81 @@ class JumbledModel extends Model {
     this._val.add(js);
   }
 }
+
+class FillInTheGaps extends Model{
+  
+  FBList _fbList;
+  bool _isFBLoaded=false;
+  String _fbtopic;
+  int _fbsolved = 0;
+  List<FbGap> _fbval;
+
+  FBList get getFillBlanks => _fbList;
+  bool get getFBIsLoaded => _isFBLoaded;
+  String get getFBTopicID => _fbtopic;
+  int get getFBSolved => _fbsolved;
+  List<FbGap> get getFBVal => _fbval; 
+
+  void set setFBFillBlanks(List<FbGap> fb) {
+    this._fbval = List.from(fb);
+  }
+
+  void set setFBIsLoaded(bool l) {
+    this._isFBLoaded = l;
+  }
+
+  void set setFBTopic(String t) {
+    this._fbtopic = t;
+  }
+
+  void set setFBSolved(int s) {
+    this._fbsolved = s;
+  }
+
+  void set setFBVal(List<FbGap> fb) {
+    this._fbval = fb;
+  }
+
+  void addFBToVal(FbGap fb){
+    this._fbval.add(fb);
+  }
+}
+
+class MCQScoped extends Model{
+  MCQ _mcqList;
+  bool _ismcqLoaded=false;
+  String _mcqtopic;
+  int _mcqsolved = 0;
+  List<MCQ> _mcqval;
+
+  MCQ get getMCQ => _mcqList;
+  bool get getMCQIsLoaded => _ismcqLoaded;
+  String get getMCQTopicID => _mcqtopic;
+  int get getMCQSolved => _mcqsolved;
+  List<MCQ> get getMCQVal => _mcqval; 
+
+  void set setMCQ(List<MCQ> mcq) {
+    this._mcqval = List.from(mcq);
+  }
+
+  void set setMCQIsLoaded(bool l) {
+    this._ismcqLoaded = l;
+  }
+
+  void set setmcqTopic(String t) {
+    this._mcqtopic = t;
+  }
+
+  void set setMCQSolved(int s) {
+    this._mcqsolved = s;
+  }
+
+  void set setMCQVal(List<MCQ> mcq) {
+    this._mcqval = mcq;
+  }
+
+  void addMCQToVal(MCQ mcq){
+    this._mcqval.add(mcq);
+  }
+}
+

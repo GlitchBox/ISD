@@ -1,6 +1,3 @@
-
-
-
 import 'package:Dimik/data/db/mcq.dart';
 import 'package:flutter/material.dart';
 
@@ -17,17 +14,17 @@ class MCQController{
   MCQRest mcqRest=new MCQRest();
   MCQDatabaseHelper mcqDatabaseHelper=new MCQDatabaseHelper();
   
-  Future<List<MCQ> >getMCQList(String token,int user_id,int topic_id)async{
+  Future<List<MCQ> >getMCQList(String token/*,int user_id*/,int topic_id)async{
     int count=await mcqDatabaseHelper.getCount();
     if(count==0)//table is empty
     {
-        MCQList mcqList=await mcqRest.getAllMCQ(token,user_id,topic_id).catchError((Object onError){
+        MCQList mcqList=await mcqRest.getAllMCQ(token/*,user_id*/,topic_id).catchError((Object onError){
           print(onError.toString());
           print("Pour some sugar on me");
         });
         await _insertMCQList(mcqList);
     }
-    List<MCQ>result = await mcqDatabaseHelper.getMCQList();
+    List<MCQ>result = await mcqDatabaseHelper.getMCQList(topic_id);
     return result;
   }
 
@@ -45,15 +42,19 @@ class MCQController{
       return mcqDatabaseHelper.insertMCQ(mcq);
   }
 
-  Future<int> updateMCQ(MCQ mcq)async
+  Future<int> updateTopic(MCQ mcq)async
   {
       return mcqDatabaseHelper.updateMCQ(mcq);
   }
 
-  Future<int> deleteMCQ(int id)async
+  Future<int> deleteTopic(int id)async
   {
       return mcqDatabaseHelper.deleteMCQ(id);
   }
+  // Future<int> deleteTopic()async
+  // {
+  //     return mcqDatabaseHelper.deleteMCQ();
+  // }
 
 }
 

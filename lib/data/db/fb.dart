@@ -22,13 +22,13 @@ class FBDatabaseHelper{
   String optionCol='Options';
   String answerCol='Answers';
   String explanationCol='Explanation';
-
+  String topicIdCol='Topic_Id';
   
 
-  Future<List<FB> > getFBList() async {
+  Future<List<FB> > getFBList(int topicId) async {
     Database dbClient = await _databaseHelper.db;
 
-    List<Map<String,dynamic> > result = await dbClient.rawQuery('SELECT * FROM $tableName');
+    List<Map<String,dynamic> > result = await dbClient.query(tableName,where:'$topicIdCol = ?',whereArgs: [topicId]);
     List<FB> fList= new List<FB>();
     for(int i=0;i<result.length;i++)
     {
