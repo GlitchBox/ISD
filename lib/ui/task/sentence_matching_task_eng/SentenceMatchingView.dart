@@ -413,6 +413,7 @@ class _SMState extends State<SentenceMatchingViewEng>
     smc.getSMList(model.user.token, model.currentTopic.id).then((qsList) {
       setState(() {
         model.smEIsLoaded = true;
+        _isLoaded = true;
         timeController.reverse(
             from: timeController.value == 0 ? 1 : timeController.value);
 
