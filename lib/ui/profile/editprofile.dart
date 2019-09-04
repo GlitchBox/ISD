@@ -126,7 +126,7 @@ class EditProfileState extends State<EditProfile> {
             body: GestureDetector(
                 child: Center(
                   child: Column(children: <Widget>[
-                    profileHeader('assets/img/profile.jpg'),
+                    profileHeader('assets/img/profile2.jpg'),
                     SizedBox(
                         height: MediaQuery.of(context).size.height < 720
                             ? MediaQuery.of(context).size.height *

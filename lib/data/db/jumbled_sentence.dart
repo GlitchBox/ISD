@@ -22,13 +22,14 @@ class JumbledDatabaseHelper{
   String segmentsCol="Segments";
   String englishSentenceCol="EnglishSentence";
   String banglaMeaningCol="BanglaMeaning";
+  //String topic_id = "Topic_Id";
 
   
 
   Future<List<Jumbled> > getSMList(String topic_id) async {
     Database dbClient = await _databaseHelper.db;
 
-    List<Map<String,dynamic> > result = await dbClient.rawQuery('SELECT * FROM $tableName WHERE Topic=$topic_id');
+    List<Map<String,dynamic> > result = await dbClient.rawQuery('SELECT * FROM $tableName WHERE Topic_Id=$topic_id');
     List<Jumbled> sList= new List<Jumbled>();
     for(int i=0;i<result.length;i++)
     {

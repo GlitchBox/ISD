@@ -9,7 +9,7 @@ import 'dart:math';
 import 'package:Dimik/databaseChange/jumbleSentence.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../../../ScopedModel/jumbled_model.dart';
-
+import 'package:Dimik/ScopedModel/mainmodel.dart';
 import 'dart:async';
 import 'dart:io' as io;
 
@@ -164,7 +164,7 @@ class _jumbleSentenceViewState extends State<jumbleSentenceView>
     //if(status==1) TimedialogBoxShown();
     // innerLoop();
     // while(isLoading);
-    return ScopedModelDescendant(
+    return ScopedModelDescendant<MainModel>(
         builder: (BuildContext context, Widget child, MainModel model) {
         topic = ModalRoute.of(context).settings.arguments;
         //topic=ModalRoute.of(context).settings.arguments;
@@ -450,7 +450,7 @@ class _jumbleSentenceViewState extends State<jumbleSentenceView>
     //fbc.deleteTopic();
     //print("In getQuestions: topic="+topic);
     //fbc.getSMList(TOKEN, topic).then((qsList) {
-    fbc.getSMList(TOKEN, "2").then((qsList) {
+    fbc.getSMList(TOKEN,2).then((qsList) {
       setState(() {
         //print("In then");
         animationCounter.reverse(

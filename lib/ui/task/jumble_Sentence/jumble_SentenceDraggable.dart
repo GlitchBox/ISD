@@ -5,6 +5,8 @@ import 'package:scoped_model/scoped_model.dart';
 import 'dart:async';
 import '../jumble_Sentence/jumbleSentenceDrag.dart';
 import 'package:Dimik/databaseChange/jumbleSentence.dart';
+import 'package:Dimik/ScopedModel/mainmodel.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class dragableFG extends StatefulWidget {
   bool isDisAbled = false;
@@ -177,7 +179,7 @@ class dragableFGStats extends State<dragableFG> {
     //     valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
     //   );
     // }
-    return ScopedModelDescendant<JumbledModel>(builder: (BuildContext context, Widget widget, JumbledModel model){
+    return ScopedModelDescendant<MainModel>(builder: (BuildContext context, Widget widget, MainModel model){
       if(model.getIsLoaded == true){
         return CircularProgressIndicator(
           strokeWidth: 3.0,

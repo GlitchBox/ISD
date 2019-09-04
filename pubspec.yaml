@@ -59,7 +59,7 @@ flutter:
   assets:
     - assets/audios/success.mp3
     - assets/audios/error.mp3
-    - assets/img/profile.jpg
+    - assets/img/profile2.jpg
     - assets/img/icons/fav.png
     - assets/img/icons/profile.png
     - assets/img/icons/tasks.png

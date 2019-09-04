@@ -16,6 +16,12 @@ class JumbledList {
     );
   }
 
+    void setTopicId(String topicId) {
+    for (int i = 0; i < sms.length; i++) {
+      sms[i].topicId = topicId;
+    }
+  }
+
   List<Jumbled>get sms =>_sms;
 }
 
@@ -72,6 +78,8 @@ class Jumbled extends MixTask{
 
   String get banglaMeaning => _bangla_meaning;
 
+  String get topicId=> _topic_id;
+
   //String get explanation => _explanation;
   //setter
   set id(int smId){
@@ -88,6 +96,10 @@ class Jumbled extends MixTask{
 
   set banglaMeaning(String banglaSentence){
     this._bangla_meaning=banglaSentence;
+  }
+
+  set topicId(String s){
+    this._topic_id = s;
   }
 
   /*
@@ -133,7 +145,7 @@ class Jumbled extends MixTask{
     map['Segments'] = segText;
     map['EnglishSentence'] = _english_sentence;
     map['BanglaMeaning'] = _bangla_meaning;
-    map['Topic'] = _topic_id;
+    map['Topic_Id'] = _topic_id;
     //map['AnswerCount'] = answerCount;
   
     
@@ -150,7 +162,7 @@ class Jumbled extends MixTask{
     this._segments = segText.split(',');
     this._english_sentence= map['EnglishSentence'];
     this._bangla_meaning = map['BanglaMeaning'];
-    this._topic_id = map['Topic'];
+    this._topic_id = map['Topic_Id'];
     //this._explanation = map['Explanation'];
   }
   /*

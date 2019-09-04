@@ -30,7 +30,7 @@ class JumbledRest{
     headers["task_id"]=taskId.toString();
     */
     //headers["topic_name"]=topicName;
-    headers["topic_id"]=topicID;//.toString();
+    headers["topic_id"]="1";//.toString();
     //print("topicID : "+topicID);
     return _netUtil.get(JUMBLED_URL,headers:headers).then((dynamic res){
       print("DEBUG :=====================\n"+
@@ -39,7 +39,9 @@ class JumbledRest{
       
       print("Hello Vietnam");
 
-        smList= new JumbledList.fromJson(res, topicID);
+      smList= new JumbledList.fromJson(res, topicID);
+      smList.setTopicId(topicID);
+
 
       //final Map<String, Map<String,dynamic> >tempRes=res;
       /*
