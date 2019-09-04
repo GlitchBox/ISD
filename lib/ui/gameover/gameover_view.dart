@@ -2,7 +2,7 @@ import 'package:Dimik/ScopedModel/mainmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
-//import 'package:pimp_my_button/pimp_my_button.dart';
+import 'package:pimp_my_button/pimp_my_button.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class GameOver extends StatefulWidget {
@@ -86,14 +86,18 @@ class GameOverState extends State<GameOver>
           case 'sm':
             // correct = model.sm;
             // incorrect = model.wpincorrect;
-            total = model.smETotalQuestions;
+            total = model.smTotalQuestions;
             score = model.smSolved;
+            correct=model.smSolved;
+            incorrect=total-correct;
             break;
           case 'mcq':
             // correct = model.sm;
             // incorrect = model.wpincorrect;
+            correct=model.getMCQSolved;
+            incorrect=model.getMCQVal.length-model.getMCQSolved;
             total = model.getMCQVal.length;
-            score = model.smSolved;
+            score = model.getMCQSolved;
             break;
           default:
         }
@@ -144,7 +148,7 @@ class GameOverState extends State<GameOver>
                 child: AnimatedBuilder(
                   animation: _animationController,
                   child: Image.asset(
-                    'assets/img/ballon.png',
+                    'assets/img/balloon.png',
                     scale: 20,
                   ),
                   builder: (context, child) => Transform.translate(
@@ -160,7 +164,7 @@ class GameOverState extends State<GameOver>
                 child: AnimatedBuilder(
                   animation: _animationController,
                   child: Image.asset(
-                    'assets/img/ballon.png',
+                    'assets/img/balloon.png',
                     scale: 20,
                   ),
                   builder: (context, child) => Transform.translate(
@@ -176,7 +180,7 @@ class GameOverState extends State<GameOver>
                 child: AnimatedBuilder(
                   animation: _animationController,
                   child: Image.asset(
-                    'assets/img/ballon.png',
+                    'assets/img/balloon.png',
                     scale: 20,
                   ),
                   builder: (context, child) => Transform.translate(
@@ -186,21 +190,21 @@ class GameOverState extends State<GameOver>
                   ),
                 ),
               ),
-              // Positioned(
-              //   child: PimpedButton(
-              //     particle: DemoParticle(),
-              //     pimpedWidgetBuilder: (context, controller) {
-              //       _makeFirework(controller);
-              //       return Text(
-              //         'Score',
-              //         style:
-              //             TextStyle(fontSize: 48, color: Colors.blueGrey[600]),
-              //       );
-              //     },
-              //   ),
-              //   top: (75.0 / 740.0) * MediaQuery.of(context).size.height,
-              //   left: (117.0 / 360.0) * MediaQuery.of(context).size.width,
-              // ),
+              Positioned(
+                child: PimpedButton(
+                  particle: DemoParticle(),
+                  pimpedWidgetBuilder: (context, controller) {
+                    _makeFirework(controller);
+                    return Text(
+                      'Score',
+                      style:
+                          TextStyle(fontSize: 48, color: Colors.blueGrey[600]),
+                    );
+                  },
+                ),
+                top: (75.0 / 740.0) * MediaQuery.of(context).size.height,
+                left: (117.0 / 360.0) * MediaQuery.of(context).size.width,
+              ),
               Positioned(
                 top: (160.0 / 740.0) * MediaQuery.of(context).size.height,
                 left: (75.0 / 360.0) * MediaQuery.of(context).size.width,
@@ -502,6 +506,20 @@ class GameOverState extends State<GameOver>
                                 model.correctLT = 0;
                                 model.incorrectLT = 0;
                                 model.ltloading = true;
+                                Navigator.pushNamed(context, '/home');
+                              }
+                              else if (task_name == 'sm') {
+                                model.smSolved = 0;
+                                // model.correctLT = 0;
+                                // model.incorrectLT = 0;
+                                // model.ltloading = true;
+                                Navigator.pushNamed(context, '/home');
+                              }
+                              else if (task_name == 'mcq') {
+                                model.setMCQSolved = 0;
+                                // model.correctLT = 0;
+                                // model.incorrectLT = 0;
+                                // model.ltloading = true;
                                 Navigator.pushNamed(context, '/home');
                               }
                             }),
