@@ -150,6 +150,7 @@ class _MCQViewState extends State<MCQView> with TickerProviderStateMixin {
     if (value == true && timerString != "0:00") {
       color = Colors.green;
       solved++;
+      
       text = "Correct Answer!";
     }
 
@@ -301,7 +302,7 @@ class _MCQViewState extends State<MCQView> with TickerProviderStateMixin {
                           iterative--;
                           animationCounter.stop();
                           //animationCounter.
-                          dialogBoxShown();
+                          dialogBoxShown(model);
                         }
                       });
                     });
@@ -369,7 +370,7 @@ class _MCQViewState extends State<MCQView> with TickerProviderStateMixin {
     }
   }
 
-  Future<bool> dialogBoxShown() {
+  Future<bool> dialogBoxShown(MainModel model) {
     return showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -386,7 +387,11 @@ class _MCQViewState extends State<MCQView> with TickerProviderStateMixin {
                   onPressed: () {
                     //dispose();
                     //fbc.deleteTopic();
-                    Navigator.of(context).pushReplacementNamed("/home");
+                    //Navigator.of(context).pushReplacementNamed("/home");
+                    model.setMCQSolved=solved;
+                     Navigator.pushReplacementNamed(
+                                      context, '/gameover',
+                                      arguments: 'mcq');
                   }
                       ,
                 )

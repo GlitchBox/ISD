@@ -274,7 +274,10 @@ class _SMState extends State<SentenceMatchingView>
                   onPressed: () {
                     // dispose();
                     // smc.deleteSM();
-                    Navigator.of(context).pushReplacementNamed("/home");
+                   // Navigator.of(context).pushReplacementNamed("/home");
+                    Navigator.pushReplacementNamed(
+                                      context, '/gameover',
+                                      arguments: 'sm');
                   },
                 ),
                 FlatButton(
@@ -368,6 +371,8 @@ class _SMState extends State<SentenceMatchingView>
         int jsonSetArrived = qsList.length ~/ 3;
         model.smTotalTasks = jsonSetArrived;
         model.smCurrentTask =1;
+        model.smTotalQuestions = model.smTotalTasks*3;
+        model.smSolved = 0;
         
 
         model.smQuestionList = new List<Map<String,String>>();

@@ -85,6 +85,7 @@ class _OptionViewState extends State<OptionView> {
           String prevText = widget._text;
           setState(() {
             if (dragged._text == widget._acceptText) {
+              model.smSolved++;
               widget._text += (" " + dragged._text);
               buttonColor = Colors.green;
               dragged.isDisabled = true;
