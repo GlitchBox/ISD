@@ -81,7 +81,7 @@ class controllerCLassState extends State<controllerClass> {
       print(value);
       //runCard();
       
-     // widget.getFunc(true);
+      widget.getFunc(true);
     }
     else{
       String temp = "colo" + buttonNum;
@@ -132,7 +132,8 @@ class controllerCLassState extends State<controllerClass> {
         
       }
       isButtonDIsabled=false;
-     // widget.getFunc(false);
+     widget.getFunc(false);
+     
     }
     //ChangeText();
   }

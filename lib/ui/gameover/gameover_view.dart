@@ -83,6 +83,18 @@ class GameOverState extends State<GameOver>
             total = correct + incorrect;
             score = model.wpScore;
             break;
+          case 'sm':
+            // correct = model.sm;
+            // incorrect = model.wpincorrect;
+            total = model.smETotalQuestions;
+            score = model.smSolved;
+            break;
+          case 'mcq':
+            // correct = model.sm;
+            // incorrect = model.wpincorrect;
+            total = model.getMCQVal.length;
+            score = model.smSolved;
+            break;
           default:
         }
 
