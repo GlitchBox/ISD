@@ -19,11 +19,11 @@ class JumbledController{
   JumbledRest jmRest=new JumbledRest();
   JumbledDatabaseHelper jmDatabaseHelper=new JumbledDatabaseHelper();
   
-  Future<List<Jumbled> >getSMList(String token,String topicID)async{
+  Future<List<Jumbled> >getSMList(String token,int topicID)async{
     int count=await jmDatabaseHelper.getCount();
     if(count==0)//table is empty
     {
-        JumbledList jmList=await jmRest.getAllSM(token,topicID).catchError((Object onError){
+        JumbledList jmList=await jmRest.getAllSM(token,topicID.toString()).catchError((Object onError){
           print(onError.toString());
           print("Pour some sugar on me");
         });
@@ -31,7 +31,7 @@ class JumbledController{
         print(jmList);
         await _insertSMList(jmList);
     }
-    List<Jumbled>result = await jmDatabaseHelper.getSMList(topicID);
+    List<Jumbled>result = await jmDatabaseHelper.getSMList(topicID.toString());
     print("In controller");
     print(result);
     return result;

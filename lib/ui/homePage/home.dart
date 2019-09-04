@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage>
                     },
                     child: CircleAvatar(
                       backgroundImage: AssetImage(
-                          'assets/img/profile.jpg'), //user profile image would be added
+                          'assets/img/profile2.jpg'), //user profile image would be added
                       minRadius: 23,
                       maxRadius: 23,
                     ),
