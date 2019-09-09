@@ -100,6 +100,14 @@ class MainDatabaseHelper {
   String jumbledBanglaMeaningCol="BanglaMeaning";
   String jumTopicIdCol = 'Topic_Id';
 
+   //for Memory Game
+  String mGTable='MG';
+  String mGIdCol='Id';
+  String mGImageLink='Image_link';
+  String mGOptions='Options';
+  String mGCorrect='Correct_answers';
+  String mGTopicId="Topic_Id";
+
   MainDatabaseHelper.internal();
 
   Future<Database> get db async {
@@ -175,6 +183,13 @@ class MainDatabaseHelper {
     "CREATE TABLE $jumbledTable($jumbledIdCol INTEGER PRIMARY KEY AUTOINCREMENT, "
     "$jumbledSegmentsCol TEXT,$jumbledEnglishSentenceCol TEXT,$jumbledBanglaMeaningCol TEXT,$jumTopicIdCol TEXT,FOREIGN KEY($jumTopicIdCol) REFERENCES $topicTable($topicIdCol))");
     print("Created jumbled table");
+
+    //MG Table
+    
+    await db.execute(
+        "CREATE TABLE $mGTable($mGIdCol INTEGER PRIMARY KEY AUTOINCREMENT, "
+        "$mGImageLink TEXT,$mGOptions TEXT,$mGCorrect TEXT,$mGTopicId INTEGER)");
+    print("Created MG tables");
     
   }
 

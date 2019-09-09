@@ -19,7 +19,8 @@ class MainModel extends Model
         SMEnglish,
         JumbledModel,
         FillInTheGaps,
-        MCQScoped {
+        MCQScoped,
+        MemoryGameModel {
   MainModel() {
     generateTasks();
   }

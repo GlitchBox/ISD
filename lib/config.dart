@@ -1,7 +1,7 @@
 //const BASE_URL = "http://192.168.0.133:8000/api";
 const MOCK_URL = "https://5cf132f13db50700145db61f.mockapi.io/api/auth/";
-const BASE_URL = "https://33963c4e.ngrok.io/api/auth";
-const LARAVEL_URL = "https://33963c4e.ngrok.io/api/auth/";
+const BASE_URL = "https://5f0bf4db.ngrok.io/api/auth";
+const LARAVEL_URL = "https://5f0bf4db.ngrok.io/api/auth/";
 //const LARAVEL_URL = "http://192.168.31.193:8000/api/auth/";
 //const LARAVEL_URL = "https://ae4de439.ngrok.io/api/auth/";
 //const LOGIN_URL=MOCK_URL+"Users";
@@ -26,6 +26,7 @@ const SME_URL = BASE_URL+"/mobile-get-eng-to-eng-sentence-matching";
 //const SME_URL = BASE_URL+"/mobile-get-eng-to-eng-sentence-matching";
 //const MCQ_URL = BASE_URL+"/mobile-getmcq";
 const JUMBLED_URL = BASE_URL+"/mobile-get-fixed-jumbled-sentence";
+const MG_URL=LARAVEL_URL+"mobile-get-memory-game";
 
 const MIXTASK_URL = BASE_URL+"/mobile-getalltask";
 
