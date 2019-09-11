@@ -1,6 +1,6 @@
 import 'package:Dimik/databaseChange/FBGapData.dart';
 import 'package:flutter/material.dart';
-import '../Fill_in_the_gaps/fillGapsControllerDragable.dart';
+import 'package:Dimik/ui/history/Fill_In_The_Gaps/fill_in_the_gaps_controller.dart';
 
 
 
@@ -10,14 +10,14 @@ class FillTheGapsStats extends StatelessWidget{
   //final String title;
   FbGap titleTemp;
   final Function getFunc;
-  final Function getFunction;
   final bool isLoaded;
-  FillTheGapsStats(this.titleTemp,this.getFunc,this.getFunction,this.isLoaded);
+  int positionNumber;
+  FillTheGapsStats(this.titleTemp,this.getFunc,this.isLoaded,this.positionNumber);
 
   @override
   Widget build(BuildContext context) {
     
     
-    return dragableFG(title:titleTemp,getFunc: getFunc,getFunction:getFunction,isLoaded: isLoaded);
+    return dragableFG(title:titleTemp,getFunc: getFunc,isLoaded: isLoaded,positionNumber:positionNumber);
   }
 }

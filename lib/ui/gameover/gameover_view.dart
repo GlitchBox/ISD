@@ -41,6 +41,12 @@ class GameOverState extends State<GameOver>
             }));
   }
 
+  void showHistory(String taskName){
+    if(taskName=="fillgaps"){
+      Navigator.pushNamed(context, '/fillThegapsHistory');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     _animationController.forward(from: 0);
@@ -95,6 +101,12 @@ class GameOverState extends State<GameOver>
             total = model.getMCQVal.length;
             score = model.smSolved;
             break;
+          case 'fillgaps':
+            correct = model.fbcorrect;
+            incorrect = model.fbtotalScore - model.fbcorrect;
+            total = model.fbtotalScore;
+            score = model.fbcorrect;
+            break;
           default:
         }
 
@@ -148,10 +160,10 @@ class GameOverState extends State<GameOver>
                     scale: 20,
                   ),
                   builder: (context, child) => Transform.translate(
-                    child: child,
-                    offset:
-                        Offset(10, _animationController.value * -300 * 3.1416),
-                  ),
+                        child: child,
+                        offset: Offset(
+                            10, _animationController.value * -300 * 3.1416),
+                      ),
                 ),
               ),
               Positioned(
@@ -164,10 +176,10 @@ class GameOverState extends State<GameOver>
                     scale: 20,
                   ),
                   builder: (context, child) => Transform.translate(
-                    child: child,
-                    offset:
-                        Offset(10, _animationController.value * -300 * 3.1416),
-                  ),
+                        child: child,
+                        offset: Offset(
+                            10, _animationController.value * -300 * 3.1416),
+                      ),
                 ),
               ),
               Positioned(
@@ -180,10 +192,10 @@ class GameOverState extends State<GameOver>
                     scale: 20,
                   ),
                   builder: (context, child) => Transform.translate(
-                    child: child,
-                    offset:
-                        Offset(10, _animationController.value * -300 * 3.1416),
-                  ),
+                        child: child,
+                        offset: Offset(
+                            10, _animationController.value * -300 * 3.1416),
+                      ),
                 ),
               ),
               // Positioned(
@@ -219,6 +231,28 @@ class GameOverState extends State<GameOver>
                   edgeStyle: SegmentEdgeStyle.round,
                   percentageValues: true,
                 ),
+              ),
+              Positioned(
+                top: (70.0 / 740.0) * MediaQuery.of(context).size.height,
+                right: (15.0 / 360.0) * MediaQuery.of(context).size.width,
+                child: Container(
+                    child: ButtonTheme(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.all(
+                                const Radius.circular(30))),
+                        child: FlatButton(
+                          child: Text("Show History"),
+                          onPressed: () {
+                              showHistory(task_name);
+                          },
+                        )),
+                    height: (60.0 / 740.0) * MediaQuery.of(context).size.height,
+                    width: (150 / 360.0) * MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.orangeAccent,
+                        borderRadius: new BorderRadius.all(
+                          const Radius.circular(30),
+                        ))),
               ),
               Positioned(
                 top: (430.0 / 740.0) * MediaQuery.of(context).size.height,
@@ -316,6 +350,9 @@ class GameOverState extends State<GameOver>
                                         model.correctWP = 0;
                                         model.incorrectWP = 0;
                                         model.wploading = true;
+                                      } else if (task_name == "fillgaps") {
+                                        model.fbcorrect = 0;
+                                        model.fbtotalScore = 0;
                                       }
                                       switch (model.currentQuizItem
                                           .tasks[model.current_quiz_tracker - 1]
@@ -367,6 +404,9 @@ class GameOverState extends State<GameOver>
                                         model.correctWP = 0;
                                         model.incorrectWP = 0;
                                         model.wploading = true;
+                                      } else if (task_name == 'fillgaps') {
+                                        model.fbtotalScore = 0;
+                                        model.fbcorrect = 0;
                                       }
                                       switch (model.currentQuizItem
                                           .tasks[model.current_quiz_tracker - 1]
@@ -420,6 +460,9 @@ class GameOverState extends State<GameOver>
                                     model.correctLT = 0;
                                     model.incorrectLT = 0;
                                     model.ltloading = true;
+                                  } else if (task_name == 'fillgaps') {
+                                    model.fbtotalScore = 0;
+                                    model.fbcorrect = 0;
                                   }
 
                                   switch (task_name) {
@@ -446,6 +489,10 @@ class GameOverState extends State<GameOver>
 
                                     case 'Kid\'s Box':
                                       Navigator.pushNamed(context, '/kbintro');
+                                      break;
+                                    case 'fillgaps':
+                                      Navigator.pushNamed(
+                                          context, '/fillTheGaps');
                                       break;
 
                                     default:

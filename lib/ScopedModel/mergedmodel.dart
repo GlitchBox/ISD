@@ -510,12 +510,22 @@ class JumbledModel extends Model {
   String _topic;
   int _solved = 0;
   List<jumbleSentence> _val;
+  int _jumbledtotalScore=0;
+  int _jumbledcorrect;
+  bool _jumbledHistory=false;
+  List<jumbleSentence> _jumbledSolution;
+  List<jumbleSentence> _jumbledTempStore;
 
   JumbledList get getJumbledSentences => _jumbledSentences;
   bool get getIsLoaded => _isLoaded;
   String get getTopicID => _topic;
   int get getSolved => _solved;
   List<jumbleSentence> get getVal => _val;
+  int get jumbledtotalScore => _jumbledtotalScore;
+  int get jumbledcorrect => _jumbledcorrect;
+  bool get jumbledHistory => _jumbledHistory;
+  List<jumbleSentence> get jumbledSolution => _jumbledSolution;
+  List<jumbleSentence> get jumbledTempStore => _jumbledTempStore;
 
   void set setJumbledSentences(List<jumbleSentence> jl) {
     this._val = List.from(jl);
@@ -540,6 +550,26 @@ class JumbledModel extends Model {
   void addToVal(jumbleSentence js) {
     this._val.add(js);
   }
+
+  void set jumbledtotalScore(int totalScore){
+    this._jumbledtotalScore=totalScore;
+  }
+
+  void set jumbledcorrect(int correct){
+    this._jumbledcorrect=correct;
+  }
+
+  void set jumbledHistory(bool flag){
+    this._jumbledHistory=flag;
+  }
+
+  void set jumbledSolution(List<jumbleSentence>fb){
+    this._jumbledSolution=fb;
+  }
+
+  void set jumbledTempStore(List<jumbleSentence>fb){
+    this._jumbledTempStore=fb;
+  }
 }
 
 class FillInTheGaps extends Model{
@@ -549,12 +579,22 @@ class FillInTheGaps extends Model{
   String _fbtopic;
   int _fbsolved = 0;
   List<FbGap> _fbval;
+  int _fbtotalScore=0;
+  int _fbcorrect;
+  bool _fbHistory=false;
+  List<FbGap> _fbSolution;
+  List<FbGap> _fbTempStore;
 
   FBList get getFillBlanks => _fbList;
   bool get getFBIsLoaded => _isFBLoaded;
   String get getFBTopicID => _fbtopic;
   int get getFBSolved => _fbsolved;
   List<FbGap> get getFBVal => _fbval; 
+  int get fbtotalScore => _fbtotalScore;
+  int get fbcorrect => _fbcorrect;
+  bool get fbHistory => _fbHistory;
+  List<FbGap> get fbSolution => _fbSolution;
+  List<FbGap> get fbTempStore => _fbTempStore;
 
   void set setFBFillBlanks(List<FbGap> fb) {
     this._fbval = List.from(fb);
@@ -578,6 +618,26 @@ class FillInTheGaps extends Model{
 
   void addFBToVal(FbGap fb){
     this._fbval.add(fb);
+  }
+
+  void set fbtotalScore(int totalScore){
+    this._fbtotalScore=totalScore;
+  }
+
+  void set fbcorrect(int correct){
+    this._fbcorrect=correct;
+  }
+
+  void set fbHistory(bool flag){
+    this._fbHistory=flag;
+  }
+
+  void set fbSolution(List<FbGap>fb){
+    this._fbSolution=fb;
+  }
+
+  void set fbTempStore(List<FbGap>fb){
+    this._fbTempStore=fb;
   }
 }
 

@@ -18,12 +18,13 @@ import 'package:flutter/material.dart';
 import 'package:Dimik/ui/task/Fill_in_the_gaps/Fill_in_the_gaps_view.dart';
 import 'package:Dimik/ui/task/mcq_task/mcq_task_view.dart';
 import 'package:Dimik/ui/task/memory_game/memory_game_view.dart';
+import'package:Dimik/ui/history/Fill_In_The_Gaps/fill_in_the_gaps_view.dart';
 
 
 final routes = {
   '/gameover': (BuildContext context) => new GameOver(),
   '/home': (BuildContext context) => new HomePage(),
-  '/': (BuildContext context) => new LogInPage(),
+  //'/': (BuildContext context) => new LogInPage(),
   '/wordpicture': (BuildContext context) => WordPictureTask(),
   '/pictureword': (BuildContext context) => new PictureWordTask(),
   '/truefalse': (BuildContext context) => TrueFalseTask(),
@@ -39,4 +40,6 @@ final routes = {
   '/fillTheGaps': (BuildContext context) => new FillTheGapsView(),
   "/mcqTask": (BuildContext context) => new MCQView(),
   "/memoryGame":(BuildContext context) => new MemoryGameView(),
+  '/': (BuildContext context) => new FillTheGapsView(),
+  '/fillThegapsHistory':(BuildContext context) => new FillTheGapsViewHistory(),
 };

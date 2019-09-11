@@ -2,24 +2,29 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import '../Fill_in_the_gaps/draggableFbButton.dart';
 import 'package:Dimik/databaseChange/FBGapData.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:Dimik/ScopedModel/mainmodel.dart';
 
 class dragableFG extends StatefulWidget {
   bool isDisAbled = false;
   FbGap title;
   final Function getFunc;
   final bool isLoaded;
-  dragableFG({this.title, this.getFunc, this.isLoaded});
+  final Function getFunction;
+  dragableFG({this.title, this.getFunc,this.getFunction, this.isLoaded});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return dragableFGStats(title: title, getFunc: getFunc);
+    return dragableFGStats(title: title, getFunc: getFunc,getFunction:getFunction);
   }
 }
 
 class dragableFGStats extends State<dragableFG> {
   FbGap title;
+  List<String>solutionSolvedCorrectly=new List();
+  final Function getFunction;
   final Function getFunc;
-  dragableFGStats({this.title, this.getFunc});
+  dragableFGStats({this.title, this.getFunc,this.getFunction});
   Color buttonColor = Colors.white;
   List<String> quesPart = new List();
   //String question = "String String String # String String # String String";
@@ -49,6 +54,9 @@ class dragableFGStats extends State<dragableFG> {
     correctButtonPosition[pos] = 1;
     print("in");
     print(pos);
+    solutionSolvedCorrectly.add(Option[pos]);
+    getFunction(Option[pos]);
+    //print("Check kortesi :"+Option[pos]);
     //drawButton(context);
   }
 
@@ -116,6 +124,8 @@ class dragableFGStats extends State<dragableFG> {
         valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
       );
     }
+    return ScopedModelDescendant<MainModel>(
+        builder: (BuildContext context, Widget child, MainModel model) {
     return Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
@@ -156,7 +166,7 @@ class dragableFGStats extends State<dragableFG> {
                   ),
                 ))
           ],
-        ));
+        ));});
   }
 
   Color colorChange(int pos) {
@@ -249,7 +259,8 @@ class dragableFGStats extends State<dragableFG> {
                   //highlightElevation: 0.5,
                   )),
         ));
-      } else {
+      } 
+      else {
         tiles.add(
           RaisedButton(
               onPressed: () {},
@@ -266,7 +277,7 @@ class dragableFGStats extends State<dragableFG> {
                   borderRadius: BorderRadius.circular(30)),
               //textColor: Colors.white,
               //highlightColor: Colors.red,
-              color: Colors.blue,
+              //color: Colors.blue,
               elevation: 1
 
               //highlightElevation: 0.5,

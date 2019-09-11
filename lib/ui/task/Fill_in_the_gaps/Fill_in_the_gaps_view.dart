@@ -47,8 +47,9 @@ class _FillTheGapsViewState extends State<FillTheGapsView>
   String value = "";
   _FillTheGapsViewState({this.cards, this.topic});
   List<FbGap> val;
+  List<String> solution = new List();
   FBController fbc;
-  int temp = 0;
+  int temp;
   int status = 0;
   String get timerString {
     Duration duration;
@@ -64,67 +65,16 @@ class _FillTheGapsViewState extends State<FillTheGapsView>
     return "";
   }
 
-  // void dataFetch() async {
-  //   var db = new DatabaseHelper();
-  //   Future<List<FillGaps>> val = db.getFillGapsData();
-  //   val.then((List<FillGaps> val) {
-  //     List<Map<String, String>> tempQuestion = new List();
-  //     List<String> correctAll = new List();
-
-  //     for (int i = 0; i < val.length; i++) {
-  //       String question = val.elementAt(i).question;
-  //       String option = val.elementAt(i).option;
-  //       String correct = val.elementAt(i).correct;
-
-  //       Map<String, String> makeQuestion = new Map();
-  //       makeQuestion[question] = option;
-  //       tempQuestion.add(makeQuestion);
-  //       correctAll.add(correct);
-  //     }
-
-  //     for (int i = 0; i < tempQuestion.length; i++) {
-  //       Map<Map<String, String>, String> correctAns = new Map();
-  //       correctAns[tempQuestion.elementAt(i)] = correctAll.elementAt(i);
-  //       cards.add(correctAns);
-  //     }
-  //     length = cards.length;
-  //     print(length);
-  //   });
-  //   //val.then((List<FillGaps>maps)=>dataEntry(maps));
-  // }
-
-  // void innerLoop() async {
-  //   await DataInsert();
-  //   print("majhe");
-  //   await dataFetch();
-  //   isLoading=false;
-  //   //await dataEntry();
-  // }
-
   @override
   void initState() {
     super.initState();
 
     index = 0;
     isPressed = false;
-    isLoading = true;
-    //innerLoop();
-    //dataEntry(val);
-    // if(length>0)
-    //   cards.add(cards[0]);
-    //addValue();
-    //Future<List<FB>>questionList;
-    //getQuestions();
-    // List<String>opt=new List();
-    // opt.add("isLoading");
-    // List<String>cor=new List();
-    // cor.add("isLoading");
-    // cards.add(new FbGap("Loading#Loading", opt, cor));
-    // cards.add(new FbGap("Loading#Loading", opt, cor));
-    // cards.add(new FbGap("Loading#Loading", opt, cor));
-    // cards.add(new FbGap("Loading#Loading", opt, cor));
-    // cards.add(new FbGap("Loading#Loading", opt, cor));
-    //length = cards.length;
+    //isLoading = true;
+    temp = 0;
+    isLoading = false;
+
     length = 5;
     animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
@@ -192,6 +142,33 @@ class _FillTheGapsViewState extends State<FillTheGapsView>
     }
   }
 
+  void hardCodeQuestion(MainModel model) {
+    List<String> q = new List();
+    List<String> co = new List();
+    model.setFBVal = new List();
+    q = ["cruel", "awesome", "sad", "funny"];
+    co = ["funny"];
+    model.getFBVal.add(new FbGap("The world is #", q, co));
+    model.fbtotalScore += co.length;
+
+    q = ["time", "father", "hero", "villain", "enough"];
+    co = ["hero", "enough", "villain"];
+    model.getFBVal.add(new FbGap(
+        "You either die as a # or live long # to see yourself a #", q, co));
+    model.fbtotalScore += co.length;
+
+    q = ["moon", "sun", "east", "west"];
+    co = ["sun", "east"];
+    model.getFBVal.add(new FbGap("The # rises in the #", q, co));
+    model.fbtotalScore += co.length;
+
+    length = model.getFBVal.length;
+  }
+
+  void saveSolution(String solutions) {
+    solution.add(solutions);
+  }
+
   @override
   Widget build(BuildContext context) {
     //if(status==1) TimedialogBoxShown();
@@ -206,7 +183,10 @@ class _FillTheGapsViewState extends State<FillTheGapsView>
       topic = ModalRoute.of(context).settings.arguments;
       //topic=ModalRoute.of(context).settings.arguments;
       if (temp == 0) {
-        getQuestions(model);
+        model.fbSolution = new List();
+        model.fbTempStore=new List();
+        //getQuestions(model);
+        hardCodeQuestion(model);
         temp++;
       }
       return WillPopScope(
@@ -309,13 +289,23 @@ class _FillTheGapsViewState extends State<FillTheGapsView>
                 child: RaisedButton(
                   onPressed: () {
                     isPressed = true;
+                    print(iterative);
+                    //print(model.getFBVal[iterative - 1].question);
+                    if (iterative <= length){
+                      model.fbSolution.add(new FbGap(
+                          model.getFBVal[0].question,
+                          solution,
+                          model.getFBVal[0].correctAns));
+                    }
                     if (timerString != "0:00") {
                       animationController.forward().whenComplete(() {
                         setState(() {
                           iterative++;
                           animationController.reset();
-                          if (isLoading == false)
+                          if (isLoading == false){
                             FbGap removedCard = model.getFBVal.removeAt(0);
+                            model.fbTempStore.add(removedCard);
+                          }
                           //cards.add(removedCard);
                           isPressed = false;
 
@@ -323,11 +313,13 @@ class _FillTheGapsViewState extends State<FillTheGapsView>
                             iterative--;
                             animationCounter.stop();
                             //animationCounter.
+                            model.fbcorrect = solved;
                             dialogBoxShown();
                           }
                         });
                       });
                     } else {
+                      model.fbcorrect = solved;
                       TimedialogBoxShown();
                     }
                   },
@@ -385,34 +377,36 @@ class _FillTheGapsViewState extends State<FillTheGapsView>
               offset: moveValue(car, model),
               child: Transform.rotate(
                   angle: rotateValue(car, model),
-                  child: FillTheGapsStats(car, getAnswer, isLoading))));
+                  child: FillTheGapsStats(
+                      car, getAnswer, saveSolution, isLoading))));
         }
       }).toList());
     }
   }
 
   Future<bool> dialogBoxShown() {
-    return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text(" Do you want to continue?"),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("Yes"),
-                  onPressed: () => Navigator.of(context)
-                      .pushReplacementNamed("/fillTheGaps"),
-                ),
-                FlatButton(
-                  child: Text("No"),
-                  //onPressed: () => Navigator.pop(context, false),
-                  onPressed: () {
-                    //dispose();
-                    //fbc.deleteTopic();
-                    Navigator.of(context).pushReplacementNamed("/home");
-                  },
-                )
-              ],
-            ));
+    // return showDialog(
+    //     context: context,
+    //     builder: (context) => AlertDialog(
+    //           title: Text(" Do you want to continue?"),
+    //           actions: <Widget>[
+    //             FlatButton(
+    //               child: Text("Yes"),
+    //               onPressed: () => Navigator.of(context)
+    //                   .pushReplacementNamed("/fillTheGaps"),
+    //             ),
+    //             FlatButton(
+    //               child: Text("No"),
+    //               //onPressed: () => Navigator.pop(context, false),
+    //               onPressed: () {
+    //                 //dispose();
+    //                 //fbc.deleteTopic();
+    //                 Navigator.of(context).pushReplacementNamed("/home");
+    //               },
+    //             )
+    //           ],
+    //         ));
+    Navigator.pushReplacementNamed(context, '/gameover', arguments: 'fillgaps');
   }
 
   Future<bool> TimedialogBoxShown() {
@@ -481,7 +475,7 @@ class _FillTheGapsViewState extends State<FillTheGapsView>
     //fbc.deleteTopic();
     //int i=int.parse(topic);
     //fbc.deleteTopic();
-    fbc.getFBList(TOKEN,1).then((qsList) {
+    fbc.getFBList(TOKEN, 1).then((qsList) {
       setState(() {
         //print("In then");
         animationCounter.reverse(
