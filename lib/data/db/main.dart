@@ -55,6 +55,8 @@ class MainDatabaseHelper {
   String smEnglishSentenceCol = 'EnglishSentence';
   String smBanglaSentenceCol = 'BanglaSentence';
   String smTopicIdCol = 'Topic_Id';
+  String smSpecificTaskId ='Specific_Task_Id';
+  String smTaskId = 'Task_Id';
 
   //for TF
   String tfTable = 'TF';
@@ -91,6 +93,8 @@ class MainDatabaseHelper {
   String smeFirstSegmentCol='FirstSegment';
   String smeLastSegmentCol ='LastSegment';
   String smeTopicIdCol = 'Topic_Id';
+  String smeSpecificTaskId ='Specific_Task_Id';
+  String smeTaskId = 'Task_Id';
 
   //for jumbled sentence
   String jumbledTable="JUMBLED";
@@ -151,7 +155,7 @@ class MainDatabaseHelper {
     //SM Table
     await db.execute(
         "CREATE TABLE $smTable($smIdCol INTEGER PRIMARY KEY AUTOINCREMENT, "
-        "$smEnglishSentenceCol TEXT,$smBanglaSentenceCol TEXT,$smTopicIdCol INTEGER, FOREIGN KEY($smTopicIdCol) REFERENCES $topicTable($topicIdCol))");
+        "$smEnglishSentenceCol TEXT,$smBanglaSentenceCol TEXT,$smTopicIdCol INTEGER, $smSpecificTaskId INTEGER, $smTaskId INTEGER ,FOREIGN KEY($smTopicIdCol) REFERENCES $topicTable($topicIdCol))");
     print("Created SM tables");
 
     //TF Table
@@ -175,7 +179,7 @@ class MainDatabaseHelper {
     //SME Table
     await db.execute(
     "CREATE TABLE $smeTable($smeIdCol INTEGER PRIMARY KEY AUTOINCREMENT, "
-    "$smeBrokenSentenceCol TEXT,$smeEnglishSentenceCol TEXT,$smeBanglaSentenceCol TEXT,$smeFirstSegmentCol TEXT,$smeLastSegmentCol TEXT,$smeTopicIdCol INTEGER,FOREIGN KEY($smeTopicIdCol) REFERENCES $topicTable($topicIdCol))");
+    "$smeBrokenSentenceCol TEXT,$smeEnglishSentenceCol TEXT,$smeBanglaSentenceCol TEXT,$smeFirstSegmentCol TEXT,$smeLastSegmentCol TEXT,$smeTopicIdCol INTEGER,$smeTaskId INTEGER, $smeSpecificTaskId INTEGER,FOREIGN KEY($smeTopicIdCol) REFERENCES $topicTable($topicIdCol))");
     print("Created sme table");
 
     //JUMBLED Table

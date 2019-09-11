@@ -9,6 +9,7 @@ import '../../../config.dart';
 import './EmptyOptionView.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../../../ScopedModel/mainmodel.dart';
+import '../sentence_matching_task_eng/TaskElement.dart';
 
 class SentenceMatchingViewEng extends StatefulWidget {
   String topic;
@@ -423,17 +424,19 @@ class _SMState extends State<SentenceMatchingViewEng>
         model.smECurrentTask = 1;
         model.smETotalTasks = jsonSetArrived;
 
-        model.smEQuestionList=new List<Map<String,String>>();
+        model.smEQuestionList=new List<Map<TaskElement,TaskElement>>();
         for (int i = 0; i < jsonSetArrived; i++) {
           
-          model.smEQuestionList.add(new Map<String, String>());
+          model.smEQuestionList.add(new Map<TaskElement, TaskElement>());
         }
         
 
         int jsonNo = 0, index;
         qsList.forEach((qs) {
           index = (jsonNo ~/ 3);
-          model.smEQuestionList.elementAt(index)[qs.firstSegment] = qs.lastSegment;
+          TaskElement seg1 = TaskElement(sentence: qs.firstSegment, taskId: qs.taskId, specificTaskId: qs.specificTaskId);
+          TaskElement seg2 = TaskElement(sentence: qs.firstSegment, taskId:qs.taskId, specificTaskId: qs.specificTaskId);          
+          model.smEQuestionList.elementAt(index)[seg1] = seg2;
 
           jsonNo++;
         });

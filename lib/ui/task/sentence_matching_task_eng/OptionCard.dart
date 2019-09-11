@@ -1,12 +1,13 @@
+import 'package:Dimik/ui/task/sentence_matching_task_eng/TaskElement.dart';
 import 'package:flutter/material.dart';
 import './OptionView.dart';
 
 class OptionCard extends StatelessWidget{
 
-  final Map<String, String> _options;
+  final Map<TaskElement, TaskElement> _options;
   final double _initialDistFromTop = 0;
   final Function notification;
-  List<String> arrangedOptions = new List<String>(6) ;
+  List<TaskElement> arrangedOptions = new List<TaskElement>(6) ;
   final bool isLoaded;
   
 
@@ -43,7 +44,7 @@ class OptionCard extends StatelessWidget{
   //   return ret;
   // }
 
-  String acceptString(String s){
+  TaskElement acceptString(TaskElement s){
     //print("in as: "+s);
 
     if(_options[s] != null)
@@ -62,8 +63,8 @@ class OptionCard extends StatelessWidget{
 
     _options.forEach((k,v){
       
-      if(k != null)
-        print("here: "+k+" "+v+" "+index.toString());
+      // if(k != null)
+      //   print("here: "+k+" "+v+" "+index.toString());
       
       arrangedOptions[order[index++]] = k;
       arrangedOptions[order[index++]] = v;

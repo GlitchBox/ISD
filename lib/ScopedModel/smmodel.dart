@@ -1,5 +1,7 @@
+import 'package:Dimik/models/task.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../models/sm.dart';
+import '../ui/task/sentence_matching_task/TaskElement.dart';
 import 'package:flutter/material.dart';
 
 class SMModel extends Model {
@@ -10,7 +12,7 @@ class SMModel extends Model {
   int _smSolved;
   int _smTotalQuestions;
   String _smButtonText = "Get Next";
-  List<Map<String,String>> _smCards = new List<Map<String,String>>();
+  List<Map<TaskElement,TaskElement>> _smCards = new List<Map<TaskElement,TaskElement>>();
   
 
   bool get smIsLoaded => _smIsLoaded;
@@ -20,7 +22,7 @@ class SMModel extends Model {
   int get smSolved => _smSolved;
   int get smTotalQuestions => _smTotalQuestions;
   String get smButtonText => _smButtonText;
-  List<Map<String,String>> get smQuestionList => _smCards;
+  List<Map<TaskElement,TaskElement>> get smQuestionList => _smCards;
 
   void set smIsLoaded(bool b){
     this._smIsLoaded = b;
@@ -50,7 +52,7 @@ class SMModel extends Model {
     this._smButtonText = s;
   }
 
-  void set smQuestionList(List<Map<String,String>> sm){
+  void set smQuestionList(List<Map<TaskElement,TaskElement>> sm){
     this._smCards = sm;
   }
 

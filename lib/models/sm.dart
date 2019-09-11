@@ -27,17 +27,19 @@ class SMList {
 
 class SM {
   int _id;
-  //int _answerCount;
-  //String _question;
   String _englishSentence;
   String _banglaSentence;
   int _topicId;
+  int _taskID;
+  int _specificTaskID;
   //String _explanation;
 
-  SM._({/*int id,*/ String english_sentence, String bangla_sentence})
+  SM._({int task_id, int specific_task_id, String english_sentence, String bangla_sentence})
       :
         //_id=id,
         //_question=question,
+        _taskID = task_id,
+        _specificTaskID = specific_task_id,
         _englishSentence = english_sentence,
         _banglaSentence = bangla_sentence;
 
@@ -55,8 +57,8 @@ class SM {
     // print("here");
     // print(json['english_sentence']+json['bangla_sentence']);
     return new SM._(
-      //id: g,
-      //question: json['broken_sentence'],
+      task_id: json["task_id"],
+      specific_task_id: json['specific_task_id'],
       english_sentence: json['english_sentence'],
       bangla_sentence: json['bangla_sentence'],
     );
@@ -64,13 +66,10 @@ class SM {
 
   //getter
   int get id => _id;
-
-  // String get question => _question;
-
+  int get taskID => _taskID;
+  int get specificTaskID => _specificTaskID;
   String get englishSentence => _englishSentence;
-
   String get banglaSentence => _banglaSentence;
-
   int get topicId => _topicId;
 
   //String get explanation => _explanation;
@@ -79,10 +78,13 @@ class SM {
     this._id = smId;
   }
 
-  // set question(String smQuestion){
-  //   this._question=smQuestion;
-  // }
+  set taskID(int t){
+    this._taskID = t;
+  }
 
+  set specificTaskID(int t){
+    this._specificTaskID = t;
+  }
   set englishSentence(String englishSentence) {
     this._englishSentence = englishSentence;
   }
@@ -126,6 +128,8 @@ class SM {
     map['EnglishSentence'] = _englishSentence;
     map['BanglaSentence'] = _banglaSentence;
     map['Topic_Id'] = _topicId;
+    map['Task_Id'] = _taskID;
+    map['Specific_Task_Id'] =_specificTaskID;
     //map['AnswerCount'] = answerCount;
     //map['Explanation'] = explanation;
 
@@ -139,6 +143,8 @@ class SM {
     this._englishSentence = map['EnglishSentence'];
     this._banglaSentence = map['BanglaSentence'];
     this._topicId = map['Topic_Id'];
+    this._taskID = map['Task_Id'];
+    this._specificTaskID = map['Specific_Task_Id'];
     //this._explanation = map['Explanation'];
   }
   /*
