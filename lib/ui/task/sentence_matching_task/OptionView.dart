@@ -103,8 +103,11 @@ class _OptionViewState extends State<OptionView> {
               buttonColor = Colors.red;
               widget.notification(false, model);
               ScoreUpdate score = ScoreUpdate(model.currentTopic.id, widget._text.taskID, widget._text.specificTaskID, 0);
+              ScoreUpdate score2 = ScoreUpdate(model.currentTopic.id, dragged._text.taskID, dragged._text.specificTaskID, 0);
               widget.scoreC.getSMList(model.user.token, score);
+              widget.scoreC.getSMList(model.user.token, score2);
               print(widget._text.specificTaskID);
+              print(dragged._text.specificTaskID);
             }
           });
           Timer(Duration(milliseconds: 700), () {
