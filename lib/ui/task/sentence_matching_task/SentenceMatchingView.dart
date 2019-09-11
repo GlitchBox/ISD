@@ -1,6 +1,7 @@
 import 'package:Dimik/data/controller/sm.dart';
 import 'package:Dimik/models/sm.dart';
 import 'package:Dimik/ui/task/sentence_matching_task/OptionCard.dart';
+import 'package:Dimik/ui/task/sentence_matching_task/TaskElement.dart';
 import 'package:Dimik/view/responsive.dart';
 import 'package:flutter/material.dart';
 import './OptionView.dart';
@@ -375,18 +376,20 @@ class _SMState extends State<SentenceMatchingView>
         model.smSolved = 0;
         
 
-        model.smQuestionList = new List<Map<String,String>>();
+        model.smQuestionList = new List<Map<TaskElement,TaskElement>>();
         for (int i = 0; i < jsonSetArrived; i++) {
           // _options[i] = new Map<String, String>();
-          model.smQuestionList.add(new Map<String, String>()); 
+          model.smQuestionList.add(new Map<TaskElement, TaskElement>()); 
         }
 
         int jsonNo = 0, index;
         qsList.forEach((qs) {
           index = (jsonNo ~/ 3);
-          model.smQuestionList.elementAt(index)[qs.banglaSentence] = qs.englishSentence;
-          //_options.elementAt(index)[qs.banglaSentence] = qs.englishSentence;
-          //print("sentences from api: "+qs.banglaSentence +" : "+ qs.englishSentence);
+          TaskElement ban = TaskElement(qs.banglaSentence, qs.taskID, qs.specificTaskID);
+          TaskElement eng = TaskElement(qs.englishSentence, qs.taskID, qs.specificTaskID);
+
+
+          model.smQuestionList.elementAt(index)[ban] = eng;
           jsonNo++;
         });
       });

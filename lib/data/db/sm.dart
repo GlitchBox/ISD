@@ -23,6 +23,8 @@ class SMDatabaseHelper{
   String englishSentenceCol='EnglishSentence';
   String banglaSentenceCol='BanglaSentence';
   String topicIdCol='Topic_Id';
+  String taskIdCol = 'Task_Id';
+  String specificTaskCol = 'Specific_Task_Id';
 
   
 

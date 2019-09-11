@@ -55,6 +55,8 @@ class MainDatabaseHelper {
   String smEnglishSentenceCol = 'EnglishSentence';
   String smBanglaSentenceCol = 'BanglaSentence';
   String smTopicIdCol = 'Topic_Id';
+  String smSpecificTaskId ='Specific_Task_Id';
+  String smTaskId = 'Task_Id';
 
   //for TF
   String tfTable = 'TF';
@@ -143,7 +145,7 @@ class MainDatabaseHelper {
     //SM Table
     await db.execute(
         "CREATE TABLE $smTable($smIdCol INTEGER PRIMARY KEY AUTOINCREMENT, "
-        "$smEnglishSentenceCol TEXT,$smBanglaSentenceCol TEXT,$smTopicIdCol INTEGER, FOREIGN KEY($smTopicIdCol) REFERENCES $topicTable($topicIdCol))");
+        "$smEnglishSentenceCol TEXT,$smBanglaSentenceCol TEXT,$smTopicIdCol INTEGER, $smSpecificTaskId INTEGER, $smTaskId INTEGER ,FOREIGN KEY($smTopicIdCol) REFERENCES $topicTable($topicIdCol))");
     print("Created SM tables");
 
     //TF Table

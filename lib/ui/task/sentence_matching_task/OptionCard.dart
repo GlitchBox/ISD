@@ -1,12 +1,13 @@
+import 'package:Dimik/ui/task/sentence_matching_task/TaskElement.dart';
 import 'package:flutter/material.dart';
 import './OptionView.dart';
 
 class OptionCard extends StatelessWidget{
 
-  final Map<String, String> _options;
+  final Map<TaskElement, TaskElement> _options;
   final double _initialDistFromTop = 0;
   final Function notification;
-  List<String> arrangedOptions = new List<String>(6) ;
+  List<TaskElement> arrangedOptions = new List<TaskElement>(6) ;
   
   
 
@@ -32,7 +33,7 @@ class OptionCard extends StatelessWidget{
                   );
   }
 
-  String acceptString(String s){
+  TaskElement acceptString(TaskElement s){
     //print("in as: "+s);
 
     if(_options[s] != null)
