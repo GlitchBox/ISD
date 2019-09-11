@@ -31,7 +31,7 @@ class TopicController {
   }
 
   Future<void> _insertTopicList(TopicList topicList) async {
-    //await topicList.downloadImages(); //downloading of images occurring here
+    await topicList.downloadImages(); //downloading of images occurring here
     List<Topic> tList = topicList.topics;
     for (int i = 0; i < tList.length; i++) {
       topicDatabaseHelper.insertTopic(tList[i]);

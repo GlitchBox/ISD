@@ -17,6 +17,7 @@ import 'package:Dimik/ui/task/jumble_Sentence/jumble_Sentence_view.dart';
 import 'package:flutter/material.dart';
 import 'package:Dimik/ui/task/Fill_in_the_gaps/Fill_in_the_gaps_view.dart';
 import 'package:Dimik/ui/task/mcq_task/mcq_task_view.dart';
+import 'package:Dimik/ui/task/memory_game/memory_game_view.dart';
 
 
 final routes = {
@@ -37,5 +38,5 @@ final routes = {
   '/jumbled': (BuildContext context) => new jumbleSentenceView(),
   '/fillTheGaps': (BuildContext context) => new FillTheGapsView(),
   "/mcqTask": (BuildContext context) => new MCQView(),
-
+  "/memoryGame":(BuildContext context) => new MemoryGameView(),
 };

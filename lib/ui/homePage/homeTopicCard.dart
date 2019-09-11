@@ -83,7 +83,10 @@ class _TopicCardState extends State<TopicCard> {
                 model.currentTopic = widget.mainTopic;
                 Navigator.pushNamed(context, '/mcqTask');
                 break;
-
+              case 'Memory Game':
+                model.currentTopic = widget.mainTopic;
+                Navigator.pushNamed(context, '/memoryGame');
+                break;
               default:
             }
           },
@@ -116,15 +119,15 @@ class _TopicCardState extends State<TopicCard> {
                           child: Container(
                             child: new ClipRRect(
                               borderRadius: new BorderRadius.circular(30.0),
-                              // child: Image.asset(
-                              //   //widget.mainTopic.imageLink,
-                              //   'img/callofduty.png',
-                              //   width: MediaQuery.of(context).size.width *
-                              //       (120 / 360),
-                              //   height: MediaQuery.of(context).size.height *
-                              //       (120 / 720),
-                              //   fit: BoxFit.cover,
-                              // ),
+                              child: Image.asset(
+                                widget.mainTopic.imageLink,
+                                //'img/callofduty.png',
+                                width: MediaQuery.of(context).size.width *
+                                    (120 / 360),
+                                height: MediaQuery.of(context).size.height *
+                                    (120 / 720),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),

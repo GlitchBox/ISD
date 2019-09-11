@@ -26,6 +26,7 @@ const SME_URL = BASE_URL+"/mobile-get-eng-to-eng-sentence-matching";
 //const SME_URL = BASE_URL+"/mobile-get-eng-to-eng-sentence-matching";
 //const MCQ_URL = BASE_URL+"/mobile-getmcq";
 const JUMBLED_URL = BASE_URL+"/mobile-get-fixed-jumbled-sentence";
+const MG_URL=LARAVEL_URL+"mobile-get-memory-game";
 
 const MIXTASK_URL = BASE_URL+"/mobile-getalltask";
 const SCORE_UPDATE_URL = BASE_URL+"/mobile-post-verdict";

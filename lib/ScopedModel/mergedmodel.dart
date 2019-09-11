@@ -18,6 +18,12 @@ import 'package:Dimik/models/jumbled_sentence.dart';
 import 'package:Dimik/databaseChange/FBGapData.dart';
 import 'package:Dimik/models/fb.dart';
 import 'package:Dimik/databaseChange/mcqData.dart';
+import 'package:Dimik/data/controller/memoryGame.dart';
+import '../models/memorygame.dart';
+import 'package:flip_card/flip_card.dart';
+import 'package:flutter/widgets.dart';
+import 'dart:async';
+import 'package:Dimik/config.dart';
 
 class MergedModel extends Model {
   final List<Topic> topics = [];
@@ -87,7 +93,7 @@ class MergedModel extends Model {
     if (!_generated) {
       TopicController tController = new TopicController();
       List<Topic> list = await tController.getTopicList(user.token);
-      for (int i = 0; i < 5; i++) {
+      for (int i = 0; i < 6; i++) {
         topics.add(list[i]);
       }
       /*
@@ -181,12 +187,14 @@ class MergedModel extends Model {
     Task t3 = Task(name: 'Jumbled Sentence');
     Task t4 = Task(name: 'Fill in The Gaps');
     Task t5 = Task(name: 'Multiple Choice Question'); 
+    Task t6= Task(name: 'Memory Game');
 
     tasks.add(t1);
     tasks.add(t2);
     tasks.add(t3);
     tasks.add(t4);
     tasks.add(t5);
+    tasks.add(t6);
     // tasks.add(t4);
     // tasks.add(t5);
     // tasks.add(t6);
@@ -610,4 +618,108 @@ class MCQScoped extends Model{
     this._mcqval.add(mcq);
   }
 }
+
+class MemoryGameModel extends Model {
+  String topic;
+  int _mgTotalTasks = 5;
+  int _mgCurrentTask=0;
+  String _buttonText;
+
+  int solved;
+  int totalQuestions;
+  bool _mgIsLoaded = true;
+  bool _mgIsPressed = false;
+  List<MG> _mgQuestionList = new List<MG>();
+  List<bool> _flip;
+  List<GlobalKey<FlipCardState>> _mgFlipKey;
+
+  bool get mgIsLoaded => _mgIsLoaded;
+  List<MG> get mgQuestionList => _mgQuestionList;
+  List<GlobalKey<FlipCardState>> get mgFlipKey => _mgFlipKey;
+  bool get mgIsPresed => _mgIsPressed;
+  int get mgCurrentTask => _mgCurrentTask;
+  int get mgTotalTask => _mgTotalTasks;
+
+  void set mgIsLoaded(bool loaded) {
+    this._mgIsLoaded = loaded;
+  }
+
+  void set mgTotalTask(int loaded) {
+    this._mgTotalTasks = loaded;
+  }
+
+   void set mgCurrentTask(int loaded) {
+    this._mgCurrentTask = loaded;
+  }
+
+  void set mgQuestionList(List<MG> qs) {
+    this._mgQuestionList = qs;
+  }
+
+  void set mgFlipKey(List<GlobalKey<FlipCardState>> fk) {
+    this._mgFlipKey = fk;
+  }
+
+  void set mgIsPressed(bool b) {
+    this._mgIsPressed = b;
+  }
+
+  void mgIncrementCurrent(){
+    _mgCurrentTask++;
+   // notifyListeners();
+  }
+
+  void popMGQuestionList(){
+    _mgQuestionList.removeAt(0);
+    //print("in pop"+ _mgQuestionList.elementAt(0).imageLink);
+    //notifyListeners();
+  }
+
+  void generateMemoryGame() async{
+  //   MG mg1=new MG(id: 1,imageLink:"assets/img/spiderman.jpeg",options:["cat","dog","mat","batman","Bangladesh"]
+  //   ,correctAnswers: ["mat","Bangladesh"]  );
+  //   MG mg2=new MG(id: 2,imageLink:"assets/img/callofduty.jpg",options:["cat","dog","mat","bat","Bangladesh","Messi","Ronaldo"]
+  //   ,correctAnswers: ["cat","Bangladesh"]);
+  //   // print(mg1.imageLink);
+  //   // print(mg1.options);
+  //   // print(mg1.correctAnswers);
+  //  _mgQuestionList.add(mg1);
+  //  _mgQuestionList.add(mg2);
+  //  print(_mgQuestionList.elementAt(0).imageLink);
+    if (_mgIsLoaded) {
+      MGController mgController = new MGController();
+      _mgQuestionList =
+          await mgController.getPWList(TOKEN,1);
+        print(_mgQuestionList);
+    }
+    _mgIsLoaded = false;
+  }
+
+  
+
+  // @override
+  // void addListener(listener) {
+  //   super.addListener(listener);
+  void initLists(){
+    _flip = new List<bool>(_mgTotalTasks);
+    _mgFlipKey=new List<GlobalKey<FlipCardState>>(_mgTotalTasks);
+    for (int i = 0; i < _mgTotalTasks; i++) {
+      
+      _mgFlipKey[i] = GlobalKey<FlipCardState>();
+      _flip[i] = true;
+    }
+  }
+
+  void mgFlipCard(int index) async {
+    print("In mgFlipCard. Index: "+index.toString());
+    Timer(Duration(milliseconds: 5000), () {
+      if (_flip[index] == true) {
+        _mgFlipKey.elementAt(index).currentState.toggleCard();
+        //notifyListeners();
+        _flip[index] = false;
+      }
+    });
+  }
+}
+
 
