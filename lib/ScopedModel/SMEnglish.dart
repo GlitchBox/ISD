@@ -1,4 +1,5 @@
 import 'package:scoped_model/scoped_model.dart';
+import '../ui/task/sentence_matching_task_eng/TaskElement.dart';
 
 class SMEnglish extends Model{
   bool _smEIsLoaded = false;
@@ -8,7 +9,7 @@ class SMEnglish extends Model{
   int _smESolved;
   int _smETotalQuestions;
   String _smEButtonText = "Get Next";
-  List<Map<String,String>> _smECards = new List<Map<String,String>>();
+  List<Map<TaskElement,TaskElement>> _smECards = new List<Map<TaskElement,TaskElement>>();
   
 
   bool get smEIsLoaded => _smEIsLoaded;
@@ -18,7 +19,7 @@ class SMEnglish extends Model{
   int get smESolved => _smESolved;
   int get smETotalQuestions => _smETotalQuestions;
   String get smEButtonText => _smEButtonText;
-  List<Map<String,String>> get smEQuestionList => _smECards;
+  List<Map<TaskElement,TaskElement>> get smEQuestionList => _smECards;
 
   void set smEIsLoaded(bool b){
     this._smEIsLoaded = b;
@@ -48,7 +49,7 @@ class SMEnglish extends Model{
     this._smEButtonText = s;
   }
 
-  void set smEQuestionList(List<Map<String,String>> sm){
+  void set smEQuestionList(List<Map<TaskElement,TaskElement>> sm){
     this._smECards = sm;
   }
 }

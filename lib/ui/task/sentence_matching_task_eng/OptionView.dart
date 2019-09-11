@@ -1,18 +1,22 @@
 import 'dart:async';
 
-import 'package:Dimik/ui/task/sentence_matching_task/SentenceMatchingView.dart';
+import 'package:Dimik/data/controller/score_update.dart';
+import 'package:Dimik/models/score_update.dart';
+import 'package:Dimik/ui/task/sentence_matching_task_eng/SentenceMatchingView.dart';
+import 'package:Dimik/ui/task/sentence_matching_task_eng/TaskElement.dart';
 import 'package:flutter/material.dart';
 import './EmptyOptionView.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../../../ScopedModel/mainmodel.dart';
 
 class OptionView extends StatefulWidget{
-  String _text;
+  TaskElement _text;
   final double _distanceFromTop;
-  final String _acceptText;
+  final TaskElement _acceptText;
   final Function notification;
   bool isDisabled = false;
   final bool isLoaded;
+  ScoreUpdateController scController = ScoreUpdateController();
 
   OptionView(this._text,this._acceptText, this._distanceFromTop, this.notification, this.isLoaded);
 
@@ -69,7 +73,7 @@ class _OptionViewState extends State<OptionView>{
               child: DragTarget(
                 builder: (context, accepted, rejected)=> RaisedButton(
                     onPressed: (){},
-                    child: Text(widget._text, style: TextStyle(fontSize: 15, /*color: Color(0x2E303E)*/), textAlign: TextAlign.center,),//showLoadOrSentence(),
+                    child: Text(widget._text.sentence, style: TextStyle(fontSize: 15, /*color: Color(0x2E303E)*/), textAlign: TextAlign.center,),//showLoadOrSentence(),
                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                      //textColor: Colors.white,
                      //highlightColor: Colors.red,
@@ -80,7 +84,7 @@ class _OptionViewState extends State<OptionView>{
                   onAccept: (OptionView dragged){
                     //print(dragged._text);
                    // if( SentenceMatchingView.time != "0:00"){
-                      String prevText = widget._text;
+                      String prevText = widget._text.sentence;
                       String newString = prevText;
                       setState(() {
                       
@@ -94,17 +98,29 @@ class _OptionViewState extends State<OptionView>{
                         //     widget.notification(true);
                             
                         // }
-                        if(dragged._text == widget._acceptText){
+                        if(dragged._text.sentence == widget._acceptText.sentence){
                           //widget._text += (" "+dragged._text);
-                          newString = dragged._text;
+                          newString = dragged._text.sentence;
                           buttonColor = Colors.green;
                           dragged.isDisabled = true;
                           widget.notification(true, model);
+
+                          ScoreUpdate score = ScoreUpdate(model.currentTopic.id, widget._text.taskID, widget._text.specificTaskID, 1);
+                          widget.scController.getSMList(model.user.token, score);
+                          print(widget._text.specificTaskID);
                           
                       }
                         else{
                             buttonColor = Colors.red;
                             widget.notification(false, model);
+
+                             ScoreUpdate score1 = ScoreUpdate(model.currentTopic.id, widget._text.taskID, widget._text.specificTaskID, 0);
+                             widget.scController.getSMList(model.user.token, score1);
+                             ScoreUpdate score2 = ScoreUpdate(model.currentTopic.id, dragged._text.taskID, dragged._text.specificTaskID, 0);
+                             widget.scController.getSMList(model.user.token, score2);
+
+                             print(widget._text.specificTaskID);
+                             print(dragged._text.specificTaskID);
                         }
 
                       });
@@ -113,7 +129,7 @@ class _OptionViewState extends State<OptionView>{
                               buttonColor = Colors.white; 
                               //print("prev: "+prevText+" text: "+widget._text);
                               if(prevText != newString){
-                                widget._text = prevText;
+                                widget._text.sentence = prevText;
                                 widget.isDisabled = true;
                               }                           
                             });
@@ -126,7 +142,7 @@ class _OptionViewState extends State<OptionView>{
                 height: 63,
                 child:RaisedButton(
                     onPressed: (){},
-                    child: Text(widget._text, style: TextStyle(fontSize: 15, /*color: Color(0x2E303E)*/), textAlign: TextAlign.center,),
+                    child: Text(widget._text.sentence, style: TextStyle(fontSize: 15, /*color: Color(0x2E303E)*/), textAlign: TextAlign.center,),
                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                      //textColor: Colors.white,
                      //highlightColor: Colors.red,
@@ -152,7 +168,7 @@ class _OptionViewState extends State<OptionView>{
   Widget showLoadOrSentence(MainModel model){
 
     if(model.smEIsLoaded == true)
-      return Text(widget._text, style: TextStyle(fontSize: 15, /*color: Color(0x2E303E)*/), textAlign: TextAlign.center,);
+      return Text(widget._text.sentence, style: TextStyle(fontSize: 15, /*color: Color(0x2E303E)*/), textAlign: TextAlign.center,);
 
     return CircularProgressIndicator(
       strokeWidth: 3.0,

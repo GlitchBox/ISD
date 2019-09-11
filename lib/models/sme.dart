@@ -31,10 +31,14 @@ class SME extends MixTask {
   String _englishSentence;
   String _banglaSentence;
   int _topicId;
+  int _taskId;
+  int _specificTaskId;
   //String _explanation;
 
   SME.mixTask(
       {int id,
+      int taskId,
+      int specificTaskId,
       String first_segment,
       String last_segment,
       String broken_sentence,
@@ -43,6 +47,8 @@ class SME extends MixTask {
       :
         //SME._({int id,String first_segment,String last_segment,String broken_sentence,String englishSentence,String banglaSentence}):
         this._id = id,
+        this._taskId = taskId,
+        this._specificTaskId = specificTaskId,
         this._first_segment = first_segment,
         this._last_segment = last_segment,
         this._broken_sentence = broken_sentence,
@@ -63,6 +69,8 @@ class SME extends MixTask {
     return new SME.mixTask(
       //return new SME._(
       //id: g,
+      taskId: json["task_id"],
+      specificTaskId: json["specific_task_id"],
       first_segment: json['first_segment'],
       last_segment: json['last_segment'],
       broken_sentence: json['broken_sentence'],
@@ -74,7 +82,9 @@ class SME extends MixTask {
   //getter
   int get id => _id;
 
-  //String get question => _question;
+  int get taskId => _taskId;
+
+  int get specificTaskId => _specificTaskId;
 
   String get englishSentence => this._englishSentence;
 
@@ -91,6 +101,14 @@ class SME extends MixTask {
   //setter
   set id(int smId) {
     this._id = smId;
+  }
+
+  set taskId(int t){
+    this._taskId = t;
+  }
+
+  set specificTaskId(int t){
+    this._specificTaskId = t;
   }
 
   set brokenSentence(String brokenSentence) {
@@ -151,6 +169,8 @@ class SME extends MixTask {
     map['FirstSegment'] = _first_segment;
     map['LastSegment'] = _last_segment;
     map['Topic_Id'] = _topicId;
+    map['Task_Id'] = _taskId;
+    map['Specific_Task_Id'] = _specificTaskId;
     //map['AnswerCount'] = answerCount;
     //map['Explanation'] = explanation;
 
@@ -167,6 +187,8 @@ class SME extends MixTask {
     this._first_segment = map['FirstSegment'];
     this._last_segment = map['LastSegment'];
     this._topicId = map['Topic_Id'];
+    this._taskId = map['Task_Id'];
+    this._specificTaskId = map['Specific_Task_Id'];
 
     //this._explanation = map['Explanation'];
   }
